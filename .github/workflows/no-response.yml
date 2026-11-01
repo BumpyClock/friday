@@ -22,7 +22,7 @@ on:
 
 jobs:
   noResponse:
-    runs-on: ubuntu-latest
+    runs-on: boat
     if: github.repository == 'wezterm/wezterm'
     steps:
       - uses: actions/stale@v9.1.0

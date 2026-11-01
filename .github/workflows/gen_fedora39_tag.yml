@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: "ubuntu-latest"
+    runs-on: "boat"
     container: "fedora:39"
     env:
       CARGO_INCREMENTAL: "0"
@@ -89,7 +89,7 @@ jobs:
           path: "wezterm-*.rpm"
 
   upload:
-    runs-on: ubuntu-latest
+    runs-on: "boat"
     needs: build
     if: github.repository == 'wezterm/wezterm'
     permissions:

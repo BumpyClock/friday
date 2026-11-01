@@ -27,7 +27,7 @@ on:
 
 jobs:
   build:
-    runs-on: "ubuntu-latest"
+    runs-on: "boat"
     container: "fedora:40"
     env:
       BUILD_REASON: "Schedule"
@@ -115,7 +115,7 @@ jobs:
           retention-days: 5
 
   upload:
-    runs-on: ubuntu-latest
+    runs-on: "boat"
     needs: build
     if: github.repository == 'wezterm/wezterm'
     permissions:

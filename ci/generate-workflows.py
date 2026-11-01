@@ -4,6 +4,8 @@ import sys
 import glob
 from copy import deepcopy
 
+LINUX_RUNNER = "boat"
+
 TRIGGER_PATHS = [
     "**/*.rs",
     "**/Cargo.lock",
@@ -181,7 +183,7 @@ class Target(object):
     def __init__(
         self,
         name=None,
-        os="ubuntu-latest",
+        os=LINUX_RUNNER,
         container=None,
         bootstrap_git=False,
         rust_target=None,
@@ -959,7 +961,7 @@ rustup default {toolchain}
         self.env["BUILD_REASON"] = "Schedule"
 
         uploader = Job(
-            runs_on="ubuntu-latest",
+            runs_on=LINUX_RUNNER,
             steps=self.checkout(submodules=False) + self.upload_asset_nightly(),
         )
 
@@ -981,7 +983,7 @@ rustup default {toolchain}
         steps += self.upload_artifact()
 
         uploader = Job(
-            runs_on="ubuntu-latest",
+            runs_on=LINUX_RUNNER,
             steps=self.checkout(submodules=False)
             + self.update_homebrew_tap()
             + self.upload_asset_tag()
@@ -1083,9 +1085,9 @@ jobs:
             # <https://github.com/cli/cli/issues/4863>
             if uploader:
                 f.write(
-                    """
+                    f"""
   upload:
-    runs-on: ubuntu-latest
+    runs-on: {yv(uploader.runs_on)}
     needs: build
     if: github.repository == 'wezterm/wezterm'
     permissions:

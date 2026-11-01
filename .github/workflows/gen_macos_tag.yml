@@ -91,7 +91,7 @@ jobs:
           path: "WezTerm-*.zip"
 
   upload:
-    runs-on: ubuntu-latest
+    runs-on: "boat"
     needs: build
     if: github.repository == 'wezterm/wezterm'
     permissions:
